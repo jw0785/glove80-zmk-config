@@ -128,21 +128,21 @@
         label = "TAP_DANCE_TO_1";
         #binding-cells = <0>;
         tapping-term-ms = <200>;
-        bindings = <&mo 1>, <&to 1>;
+        bindings = <&bslh_hold 1 RET>, <&to 1>;
     };
     td_layer_2: tap_dance_2 {
         compatible = "zmk,behavior-tap-dance";
         label = "TAP_DANCE_TO_3";
         #binding-cells = <0>;
         tapping-term-ms = <200>;
-        bindings = <&mo 3>, <&to 3>;
+        bindings = <&bslh_hold 3 RET>, <&to 3>;
     };
     td_layer_3: tap_dance_a {
         compatible = "zmk,behavior-tap-dance";
         label = "TAP_DANCE_TO_6";
         #binding-cells = <0>;
         tapping-term-ms = <200>;
-        bindings = <&mo 6>, <&to 6>;
+        bindings = <&bslh_hold 6 RET>, <&to 6>;
     };
     td_lshift: tap_dance_3 {
         compatible = "zmk,behavior-tap-dance";
@@ -150,6 +150,20 @@
         #binding-cells = <0>;
         tapping-term-ms = <200>;
         bindings = <&kp LSHIFT>, <&kt LSHIFT>;
+    };
+	td_toggle_1: td_toggle_1 {
+        compatible = "zmk,behavior-tap-dance";
+        label = "TD_TOGGLE_1";
+        #binding-cells = <0>;
+        tapping-term-ms = <150>;
+        bindings = <&kp APPLE_FN>, <&tog 8>;
+    };
+	td_toggle_2: td_toggle_2 {
+        compatible = "zmk,behavior-tap-dance";
+        label = "TD_TOGGLE_2";
+        #binding-cells = <0>;
+        tapping-term-ms = <150>;
+        bindings = <&kp LSHFT>, <&tog 8>;
     };
     td_rshift: tap_dance_4 {
         compatible = "zmk,behavior-tap-dance";
@@ -272,7 +286,7 @@
  &td_layer_0      &kp Q     &kp W      &kp E       &kp R   &kp T                                                                 &kp Y            &kp U      &kp I     &kp O      &kp P  &bslh_hold 1 BSLH
     &cap_tab      &kp A     &kp S      &kp D       &kp F   &kp G                                                                 &kp H            &kp J      &kp K     &kp L   &kp SEMI            &kp SQT
    &kp LSHFT      &kp Z     &kp X      &kp C       &kp V   &kp B   &bksp_concatenate  &bslh_hold 1 END  &kp PG_UP    &kp UP  &kp LEFT  &kp RIGHT   &kp N            &kp M  &kp COMMA   &kp DOT   &kp FSLH          &kp RSHFT
-  &kp APPLE_FN  &kp LCTRL  &kp LALT  &kp MINUS    &kp LGUI          &kp SPACE  &kp TAB  &kp PG_DN  &kp DOWN   &kp RET  &kp SPACE                 &kp RGUI  &kp EQUAL  &kp RALT  &kp RCTRL         &kp APPLE_FN
+  &td_toggle_1  &kp LCTRL  &kp LALT  &kp MINUS    &kp LGUI          &kp SPACE  &kp TAB  &kp PG_DN  &kp DOWN   &kp RET  &kp SPACE                 &kp RGUI  &kp EQUAL  &kp RALT  &kp RCTRL         &td_toggle_1
             >;
         };
 
@@ -280,10 +294,10 @@
             bindings = <
  &kp C_BRI_DN     &kp C_BRI_UP  &none  &none     &kp F5                                                                                     &kp C_PP  &kp C_NEXT    &kp C_MUTE  &kp C_VOL_DN    &kp C_VOL_UP
  &kp GRAVE      &to 2           &to 5          &none       &magic 7 0   &kp F6                                                                    &kp F7    &kp KP_NUM      &kp SLCK       &kp INS        &kp PSCRN      &none
-     &to 0    &kp RET         &kp ESC    &kp UP_ARROW          &kp F11  &kp F12                                                                &kp C_PREV     &kp KP_N7     &kp KP_N8     &kp KP_N9     &kp KP_SLASH      &none
+     &to 0    &kp ESC         &none    &kp UP_ARROW          &kp F11  &kp F12                                                                &kp C_PREV     &kp KP_N7     &kp KP_N8     &kp KP_N9     &kp KP_SLASH      &none
   &cap_tab      &none  &kp LEFT_ARROW  &kp DOWN_ARROW  &kp RIGHT_ARROW    &to 4                                                                &kp C_NEXT     &kp KP_N4     &kp KP_N5     &kp KP_N6  &kp KP_MULTIPLY      &none
  &kp LSHFT      &none           &none           &none            &none    &none   &kp HOME  &kp END  &kp PG_UP  &kp PG_UP    &none    &kp DEL    &kp C_PP     &kp KP_N1     &kp KP_N2     &kp KP_N3     &kp KP_MINUS  &kp RSHFT
- &kp APPLE_FN  &kp LCTRL        &kp LALT       &kp MINUS         &kp LGUI           &kp SPACE  &kp TAB  &kp PG_DN  &kp PG_DN  &kp RET  &kp SPACE                 &kp KP_N0    &kp KP_DOT  &kp KP_ENTER      &kp KP_PLUS  &kp APPLE_FN
+ &td_toggle_1  &kp LCTRL        &kp LALT       &kp MINUS         &kp LGUI           &kp SPACE  &kp TAB  &kp PG_DN  &kp PG_DN  &kp RET  &kp SPACE                 &kp KP_N0    &kp KP_DOT  &kp KP_ENTER      &kp KP_PLUS  &td_toggle_1
             >;
         };
 
@@ -302,7 +316,7 @@
             bindings = <
 &kp C_BRI_DN     &kp C_BRI_UP  &none  &none     &kp F5                                                                                               &kp F8         &none         &kp C_MUTE      &kp C_VOL_DN   &kp C_VOL_UP
  &kp GRAVE      &to 0         &none         &none  &magic 7 0   &kp F6                                                                    &mt F7 C_PREV    &kp KP_NUM      &kp SLCK       &kp INS        &kp PSCRN      &none
-     &to 2    &kp RET       &kp ESC        &kp UP     &kp F11  &kp F12                                                                &kp C_PREV     &kp KP_N7     &kp KP_N8     &kp KP_N9     &kp KP_SLASH      &none
+     &to 2    &kp ESC         &none        &kp UP     &kp F11  &kp F12                                                                &kp C_PREV     &kp KP_N7     &kp KP_N8     &kp KP_N9     &kp KP_SLASH      &none
   &cap_tab      &none      &kp LEFT      &kp DOWN   &kp RIGHT    &to 4                                                                &kp C_NEXT     &kp KP_N4     &kp KP_N5     &kp KP_N6  &kp KP_MULTIPLY      &none
  &kp LSHFT      &none         &none         &none       &none    &none   &kp HOME  &kp END  &kp PG_UP  &kp PG_UP    &none    &kp DEL    &kp C_PP     &kp KP_N1     &kp KP_N2     &kp KP_N3     &kp KP_MINUS  &kp RSHFT
  &kp LSHFT  &kp LCTRL      &kp LGUI      &kp LALT   &kp MINUS           &kp SPACE  &kp TAB  &kp PG_DN  &kp PG_DN  &kp RET  &kp SPACE                 &kp KP_N0    &kp KP_DOT  &kp KP_ENTER      &kp KP_PLUS  &kp RSHFT
@@ -311,7 +325,7 @@
 
         layer_gaming {
             bindings = <
- &mt F1 ESC     &kp F2    &kp F3    &kp F4  &magic 7 0                                                                                    &kp F8     &kp F9   &kp F10    &kp F11    &kp F12
+ &mt F1 ESC     &kp F2    &kp F3    &kp F4  &magic 7 0                                                                                    &kp F8     &kp F9   &kp F10    &kp F11    &kp F12 
      &kp N9     &kp N0    &kp N1    &kp N2      &kp N3  &kp N4                                                                 &kp N5     &kp N6     &kp N7    &kp N8   &kp LBKT   &kp RBKT
   &td_qgame    &kp TAB     &kp Q     &kp W       &kp E   &kp R                                                                  &kp Y      &kp U      &kp I     &kp O      &kp P   &kp BSLH
       &kp G   &kp CAPS     &kp A     &kp S       &kp D   &kp F                                                                  &kp H      &kp J      &kp K     &kp L   &kp SEMI    &kp SQT
@@ -327,7 +341,7 @@
  &td_layer_3      &win_quit     &kp W     &kp E       &kp R   &kp T                                                                 &kp Y            &kp U      &kp I     &kp O      &kp P  &bslh_hold 6 BSLH
     &cap_tab_tri      &kp A     &kp S     &kp D       &kp F   &kp G                                                                 &kp H            &kp J      &kp K     &kp L   &kp SEMI            &kp SQT
    &kp LSHFT      &kp Z     &kp X     &kp C       &kp V   &kp B   &bksp_concatenate  &bslh_hold 6 END  &kp PG_UP    &kp UP  &kp LEFT  &kp RIGHT   &kp N            &kp M  &kp COMMA   &kp DOT   &kp FSLH          &kp RSHFT
-  &kp APPLE_FN  &kp LALT  &kp LGUI  &kp MINUS   &kp LCTRL          &kp SPACE  &kp TAB  &kp PG_DN  &kp DOWN   &kp RET  &kp SPACE                &kp RCTRL   &kp EQUAL  &kp RGUI  &kp RALT         &td_rshift
+  &td_toggle_1  &kp LALT  &kp LGUI  &kp MINUS   &kp LCTRL          &kp SPACE  &kp TAB  &kp PG_DN  &kp DOWN   &kp RET  &kp SPACE                &kp RCTRL   &kp EQUAL  &kp RGUI  &kp RALT         &td_rshift
             >;
         };
 
@@ -335,10 +349,10 @@
             bindings = <
  &kp C_BRI_DN     &kp C_BRI_UP  &mt RG(TAB) RG(PSCRN)  &kp RG(RS(S))    &kp F5                                                                      &kp F8          &none       &kp C_MUTE      &kp C_VOL_DN    &kp C_VOL_UP
  &kp GRAVE      &none         &to 0         &none  &magic 7 0   &kp F6                                                                    &mt F7 C_PREV    &kp KP_NUM      &kp SLCK       &kp INS        &kp PSCRN      &none
-     &to 5    &kp RET       &kp ESC        &kp UP     &kp F11  &kp F12                                                                &kp C_PREV     &kp KP_N7     &kp KP_N8     &kp KP_N9     &kp KP_SLASH      &none
+     &to 5    &kp ESC         &none        &kp UP     &kp F11  &kp F12                                                                &kp C_PREV     &kp KP_N7     &kp KP_N8     &kp KP_N9     &kp KP_SLASH      &none
   &cap_tab_tri      &none      &kp LEFT      &kp DOWN   &kp RIGHT    &to 4                                                                &kp C_NEXT     &kp KP_N4     &kp KP_N5     &kp KP_N6  &kp KP_MULTIPLY      &none
  &kp LSHFT      &none         &none         &none       &none    &none   &kp HOME  &kp END  &kp PG_UP  &kp PG_UP    &none    &kp DEL    &kp C_PP     &kp KP_N1     &kp KP_N2     &kp KP_N3     &kp KP_MINUS  &kp RSHFT
- &kp APPLE_FN  &kp LALT     &kp LGUI     &kp MINUS      &kp LCTRL           &kp SPACE  &kp TAB  &kp PG_DN  &kp PG_DN  &kp RET  &kp SPACE                 &kp KP_N0    &kp KP_DOT  &kp KP_ENTER      &kp KP_PLUS  &kp RSHFT
+ &td_toggle_1  &kp LALT     &kp LGUI     &kp MINUS      &kp LCTRL           &kp SPACE  &kp TAB  &kp PG_DN  &kp PG_DN  &kp RET  &kp SPACE                 &kp KP_N0    &kp KP_DOT  &kp KP_ENTER      &kp KP_PLUS  &kp RSHFT
             >;
         };
 
@@ -350,6 +364,17 @@
       &none  &rgb_ug RGB_SPD  &rgb_ug RGB_SAD  &rgb_ug RGB_HUD  &rgb_ug RGB_BRD  &rgb_ug RGB_EFF                                                   &none   &none   &none   &none   &none           &none
       &none            &none            &none            &none            &none            &none   &none   &none   &none   &none   &none   &none   &none   &none   &none   &none   &none           &none
      &reset            &none            &none            &none            &none                    &none   &none   &none   &none   &none   &none           &none   &none   &none   &none          &reset
+            >;
+        };
+		
+		Override {
+            bindings = <
+	  &trans            &trans            &trans            &trans            &trans                                                                            &trans   &trans   &trans   &trans  	       &trans
+      &trans            &trans            &trans            &trans            &trans            &trans                                                   &trans   &trans   &trans   &trans   &trans           &trans
+      &trans            &trans            &trans            &trans            &trans            &trans                                                   &trans   &trans   &trans   &trans   &trans           &trans
+      &trans            &trans            &trans            &trans            &trans            &trans                                                   &trans   &trans   &trans   &trans   &trans           &trans
+      &trans            &trans            &trans            &trans            &trans            &trans   &trans   &trans   &trans   &trans   &trans   &trans   &trans   &trans   &trans   &trans   &trans           &trans
+  &td_toggle_2            &trans            &trans            &trans            &trans                    &trans   &trans   &trans   &trans   &trans   &trans           &trans   &trans   &trans   &trans           &kp RSHFT
             >;
         };
 
