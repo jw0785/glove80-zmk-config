@@ -120,6 +120,16 @@
             key-positions = <63 79>;
             bindings = <&kp RSHIFT>;
         };
+		combo_home {
+            timeout-ms = <15>;
+            key-positions = <52 53>;
+            bindings = <&kp HOME>;
+        };
+		combo_delete {
+            timeout-ms = <15>;
+            key-positions = <56 57>;
+            bindings = <&kp DEL>;
+        };
     };
     
     behaviors {
@@ -296,7 +306,7 @@
  &kp GRAVE      &to 2           &to 5          &none       &magic 7 0   &kp F6                                                                    &kp F7    &kp KP_NUM      &kp SLCK       &kp INS        &kp PSCRN      &none
      &to 0    &kp ESC         &none    &kp UP_ARROW          &kp F11  &kp F12                                                                &kp C_PREV     &kp KP_N7     &kp KP_N8     &kp KP_N9     &kp KP_SLASH      &none
   &cap_tab      &none  &kp LEFT_ARROW  &kp DOWN_ARROW  &kp RIGHT_ARROW    &to 4                                                                &kp C_NEXT     &kp KP_N4     &kp KP_N5     &kp KP_N6  &kp KP_MULTIPLY      &none
- &kp LSHFT      &none           &none           &none            &none    &none   &kp HOME  &kp END  &kp PG_UP  &kp PG_UP    &none    &kp DEL    &kp C_PP     &kp KP_N1     &kp KP_N2     &kp KP_N3     &kp KP_MINUS  &kp RSHFT
+ &kp LSHFT      &none           &none           &none            &none    &none   &bksp_concatenate  &kp END  &kp PG_UP  &kp PG_UP    &none    &kp DEL    &kp C_PP     &kp KP_N1     &kp KP_N2     &kp KP_N3     &kp KP_MINUS  &kp RSHFT
  &td_toggle_1  &kp LCTRL        &kp LALT       &kp MINUS         &kp LGUI           &kp SPACE  &kp TAB  &kp PG_DN  &kp PG_DN  &kp RET  &kp SPACE                 &kp KP_N0    &kp KP_DOT  &kp KP_ENTER      &kp KP_PLUS  &td_toggle_1
             >;
         };
@@ -318,7 +328,7 @@
  &kp GRAVE      &to 0         &none         &none  &magic 7 0   &kp F6                                                                    &mt F7 C_PREV    &kp KP_NUM      &kp SLCK       &kp INS        &kp PSCRN      &none
      &to 2    &kp ESC         &none        &kp UP     &kp F11  &kp F12                                                                &kp C_PREV     &kp KP_N7     &kp KP_N8     &kp KP_N9     &kp KP_SLASH      &none
   &cap_tab      &none      &kp LEFT      &kp DOWN   &kp RIGHT    &to 4                                                                &kp C_NEXT     &kp KP_N4     &kp KP_N5     &kp KP_N6  &kp KP_MULTIPLY      &none
- &kp LSHFT      &none         &none         &none       &none    &none   &kp HOME  &kp END  &kp PG_UP  &kp PG_UP    &none    &kp DEL    &kp C_PP     &kp KP_N1     &kp KP_N2     &kp KP_N3     &kp KP_MINUS  &kp RSHFT
+ &kp LSHFT      &none         &none         &none       &none    &none   &bksp_concatenate  &kp END  &kp PG_UP  &kp PG_UP    &none    &kp DEL    &kp C_PP     &kp KP_N1     &kp KP_N2     &kp KP_N3     &kp KP_MINUS  &kp RSHFT
  &kp LSHFT  &kp LCTRL      &kp LGUI      &kp LALT   &kp MINUS           &kp SPACE  &kp TAB  &kp PG_DN  &kp PG_DN  &kp RET  &kp SPACE                 &kp KP_N0    &kp KP_DOT  &kp KP_ENTER      &kp KP_PLUS  &kp RSHFT
             >;
         };
@@ -351,7 +361,7 @@
  &kp GRAVE      &none         &to 0         &none  &magic 7 0   &kp F6                                                                    &mt F7 C_PREV    &kp KP_NUM      &kp SLCK       &kp INS        &kp PSCRN      &none
      &to 5    &kp ESC         &none        &kp UP     &kp F11  &kp F12                                                                &kp C_PREV     &kp KP_N7     &kp KP_N8     &kp KP_N9     &kp KP_SLASH      &none
   &cap_tab_tri      &none      &kp LEFT      &kp DOWN   &kp RIGHT    &to 4                                                                &kp C_NEXT     &kp KP_N4     &kp KP_N5     &kp KP_N6  &kp KP_MULTIPLY      &none
- &kp LSHFT      &none         &none         &none       &none    &none   &kp HOME  &kp END  &kp PG_UP  &kp PG_UP    &none    &kp DEL    &kp C_PP     &kp KP_N1     &kp KP_N2     &kp KP_N3     &kp KP_MINUS  &kp RSHFT
+ &kp LSHFT      &none         &none         &none       &none    &none   &bksp_concatenate  &kp END  &kp PG_UP  &kp PG_UP    &none    &kp DEL    &kp C_PP     &kp KP_N1     &kp KP_N2     &kp KP_N3     &kp KP_MINUS  &kp RSHFT
  &td_toggle_1  &kp LALT     &kp LGUI     &kp MINUS      &kp LCTRL           &kp SPACE  &kp TAB  &kp PG_DN  &kp PG_DN  &kp RET  &kp SPACE                 &kp KP_N0    &kp KP_DOT  &kp KP_ENTER      &kp KP_PLUS  &kp RSHFT
             >;
         };
