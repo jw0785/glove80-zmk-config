@@ -42,8 +42,78 @@
             bindings
                 = <&rgb_ug RGB_STATUS>;
         };
+    };
+};
 
-        bt_0: bt_profile_macro_0 {
+/ {
+#ifdef BT_DISC_CMD
+    behaviors {
+        bt_0: bt_0 {
+            compatible = "zmk,behavior-tap-dance";
+            label = "BT_0";
+            #binding-cells = <0>;
+            tapping-term-ms = <200>;
+            bindings = <&bt_select_0>, <&bt BT_DISC 0>;
+        };
+        bt_1: bt_1 {
+            compatible = "zmk,behavior-tap-dance";
+            label = "BT_1";
+            #binding-cells = <0>;
+            tapping-term-ms = <200>;
+            bindings = <&bt_select_1>, <&bt BT_DISC 1>;
+        };
+        bt_2: bt_2 {
+            compatible = "zmk,behavior-tap-dance";
+            label = "BT_2";
+            #binding-cells = <0>;
+            tapping-term-ms = <200>;
+            bindings = <&bt_select_2>, <&bt BT_DISC 2>;
+        };
+        bt_3: bt_3 {
+            compatible = "zmk,behavior-tap-dance";
+            label = "BT_3";
+            #binding-cells = <0>;
+            tapping-term-ms = <200>;
+            bindings = <&bt_select_3>, <&bt BT_DISC 3>;
+        };
+    };
+    macros {
+        bt_select_0: bt_select_0 {
+            label = "BT_SELECT_0";
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&out OUT_BLE>,
+                  <&bt BT_SEL 0>;
+        };
+        bt_select_1: bt_select_1 {
+            label = "BT_SELECT_1";
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&out OUT_BLE>,
+                  <&bt BT_SEL 1>;
+        };
+        bt_select_2: bt_select_2 {
+            label = "BT_SELECT_2";
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&out OUT_BLE>,
+                  <&bt BT_SEL 2>;
+        };
+        bt_select_3: bt_select_3 {
+            label = "BT_SELECT_3";
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&out OUT_BLE>,
+                  <&bt BT_SEL 3>;
+        };
+    };
+	#else
+    macros {
+        bt_0: bt_0 {
             label = "BT_0";
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
@@ -51,8 +121,7 @@
                 = <&out OUT_BLE>,
                   <&bt BT_SEL 0>;
         };
-
-        bt_1: bt_profile_macro_1 {
+        bt_1: bt_1 {
             label = "BT_1";
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
@@ -60,8 +129,7 @@
                 = <&out OUT_BLE>,
                   <&bt BT_SEL 1>;
         };
-
-        bt_2: bt_profile_macro_2 {
+        bt_2: bt_2 {
             label = "BT_2";
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
@@ -69,8 +137,7 @@
                 = <&out OUT_BLE>,
                   <&bt BT_SEL 2>;
         };
-
-        bt_3: bt_profile_macro_3 {
+        bt_3: bt_3 {
             label = "BT_3";
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
@@ -78,15 +145,8 @@
                 = <&out OUT_BLE>,
                   <&bt BT_SEL 3>;
         };
-        concatenate: concatenate {
-            label = "CONCATENATE";
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings
-                = <&macro_tap &kp DOWN &kp HOME &kp BACKSPACE &kp SPACE>
-                ;
-        };
     };
+#endif
 };
 
 / {
@@ -162,13 +222,13 @@
         tapping-term-ms = <200>;
         bindings = <&kp APPLE_FN>, <&tog 8>;
     };
-	td_toggle_2: td_toggle_2 {
-        compatible = "zmk,behavior-tap-dance";
-        label = "TD_TOGGLE_2";
-        #binding-cells = <0>;
-        tapping-term-ms = <200>;
-        bindings = <&kp LSHFT>, <&tog 8>;
-    };
+		td_toggle_2: td_toggle_2 {
+			compatible = "zmk,behavior-tap-dance";
+			label = "TD_TOGGLE_2";
+			#binding-cells = <0>;
+			tapping-term-ms = <200>;
+			bindings = <&kp LSHFT>, <&tog 8>;
+		};
     td_rshift: tap_dance_4 {
         compatible = "zmk,behavior-tap-dance";
         label = "TAP_LOCK_RSHIFT";
@@ -195,8 +255,15 @@
         label = "TAP_QUIT_GAMING";
         #binding-cells = <0>;
         tapping-term-ms = <200>;
-        bindings = <&kp T>, <&to 2>;
+        bindings = <&kp T>, <&to_5>;
     };
+	concatenate: concatenate {
+		label = "CONCATENATE";
+		compatible = "zmk,behavior-macro";
+		#binding-cells = <0>;
+		bindings
+			= <&macro_tap &kp DOWN &kp HOME &kp BACKSPACE &kp SPACE>;
+	};
     cap_tab: cap_tab {
         compatible = "zmk,behavior-mod-morph";
         label = "CAP_TAB";
@@ -223,9 +290,33 @@
         compatible = "zmk,behavior-mod-morph";
         label = "WIN_QUIT";
         #binding-cells = <0>;
-        bindings = <&kp Q>, <&kp RA(F4)>;
+        bindings = <&kp Q>, <&wq_hold RA(F4) RC(Q)>;
         mods = <(MOD_LCTL)>;
     };
+		wq_hold: wq_hold {
+			compatible = "zmk,behavior-hold-tap";
+			label = "WQ_HOLD";
+			#binding-cells = <2>;
+			flavor = "tap-preferred";
+			tapping-term-ms = <200>;
+			bindings = <&kp>, <&kp>;
+		};
+	win_menu: win_menu {
+        compatible = "zmk,behavior-mod-morph";
+        label = "WIN_MENU";
+        #binding-cells = <0>;
+        bindings = <&kp M>, <&wq_hold RS(F10) RC(M)>;
+        mods = <(MOD_LCTL)>;
+    };
+	to_5: to_5 {
+		label = "TO_5";
+		compatible = "zmk,behavior-macro";
+		#binding-cells = <0>;
+		bindings
+			= <&to 5>,
+			  <&tog 8>;
+	};
+	
  /*
         _win_screenshot: _win_screenshot {
             compatible = "zmk,behavior-mod-morph";
@@ -290,18 +381,18 @@
  &td_layer_0      &kp Q     &kp W      &kp E       &kp R   &kp T                                                                 &kp Y            &kp U      &kp I     &kp O      &kp P  &mo_tap 1 BSLH
     &cap_tab      &kp A     &kp S      &kp D       &kp F   &kp G                                                                 &kp H            &kp J      &kp K     &kp L   &kp SEMI            &kp SQT
    &kp LSHFT      &kp Z     &kp X      &kp C       &kp V   &kp B   &bksp_concatenate  &mo_tap 1 END  &kp PG_UP    &kp UP  &kp LEFT  &kp RIGHT   &kp N            &kp M  &kp COMMA   &kp DOT   &kp FSLH          &kp RSHFT
-  &td_toggle_1  &kp LCTRL  &kp LALT  &kp MINUS    &kp LGUI          &kp SPACE  &kp TAB  &kp PG_DN  &kp DOWN   &kp RET  &kp SPACE                 &kp RGUI  &kp EQUAL  &kp RALT  &kp RCTRL         &td_toggle_1
+  &td_toggle_1  &kp LCTRL  &kp LALT  &kp MINUS    &kp LGUI          &kp SPACE  &kp TAB  &mt LSHFT PG_DN  &kp DOWN   &kp RET  &kp SPACE                 &kp RGUI  &kp EQUAL  &kp RALT  &kp RCTRL         &td_toggle_1
             >;
         };
 
         layer_mo1 {
             bindings = <
  &kp C_BRI_DN     &kp C_BRI_UP  &none  &none     &kp F5                                                                                     &kp C_PP  &kp C_NEXT    &kp C_MUTE  &kp C_VOL_DN    &kp C_VOL_UP
- &kp GRAVE      &to 2           &to 5          &none       &magic 7 0   &kp F6                                                                    &kp F7    &kp KP_NUM      &kp SLCK       &kp INS        &kp PSCRN      &none
+ &kp GRAVE      &to 2           &to_5        &none       &magic 7 0   &kp F6                                                                    &kp F7    &kp KP_NUM      &kp SLCK       &kp INS        &kp PSCRN      &none
      &to 0    &kp ESC         &none    &kp UP_ARROW          &kp F11  &kp F12                                                                &kp C_PREV     &kp KP_N7     &kp KP_N8     &kp KP_N9     &kp KP_SLASH      &none
   &cap_tab      &none  &kp LEFT_ARROW  &kp DOWN_ARROW  &kp RIGHT_ARROW    &to 4                                                                &kp C_NEXT     &kp KP_N4     &kp KP_N5     &kp KP_N6  &kp KP_MULTIPLY      &none
  &kp LSHFT      &none           &none           &none            &none    &none   &bksp_concatenate  &kp END  &kp PG_UP  &kp PG_UP    &none    &kp DEL    &kp C_PP     &kp KP_N1     &kp KP_N2     &kp KP_N3     &kp KP_MINUS  &kp RSHFT
- &td_toggle_1  &kp LCTRL        &kp LALT       &kp MINUS         &kp LGUI           &kp SPACE  &kp TAB  &kp PG_DN  &kp PG_DN  &kp RET  &kp SPACE                 &kp KP_N0    &kp KP_DOT  &kp KP_ENTER      &kp KP_PLUS  &td_toggle_1
+ &td_toggle_1  &kp LCTRL        &kp LALT       &kp MINUS         &kp LGUI           &kp SPACE  &kp TAB  &mt LSHFT PG_DN  &mt LSHFT PG_DN  &kp RET  &kp SPACE                 &kp KP_N0    &kp KP_DOT  &kp KP_ENTER      &kp KP_PLUS  &td_toggle_1
             >;
         };
 
@@ -312,7 +403,7 @@
  &td_layer_2      &kp Q     &kp W     &kp E       &kp R   &kp T                                                                 &kp Y            &kp U      &kp I     &kp O      &kp P  &mo_tap 3 BSLH
     &cap_tab      &kp A     &kp S     &kp D       &kp F   &kp G                                                                 &kp H            &kp J      &kp K     &kp L   &kp SEMI            &kp SQT
    &kp LSHFT      &kp Z     &kp X     &kp C       &kp V   &kp B   &bksp_concatenate  &mo_tap 3 END  &kp PG_UP    &kp UP  &kp LEFT  &kp RIGHT   &kp N            &kp M  &kp COMMA   &kp DOT   &kp FSLH          &kp RSHFT
-  &td_lshift  &kp LCTRL  &kp LGUI  &kp LALT   &kp MINUS          &kp SPACE  &kp TAB  &kp PG_DN  &kp DOWN   &kp RET  &kp SPACE                &kp EQUAL   &kp RALT  &kp RGUI  &kp RCTRL         &td_rshift
+  &td_lshift  &kp LCTRL  &kp LGUI  &kp LALT   &kp MINUS          &kp SPACE  &kp TAB  &mt LSHFT PG_DN  &kp DOWN   &kp RET  &kp SPACE                &kp EQUAL   &kp RALT  &kp RGUI  &kp RCTRL         &td_rshift
             >;
         };
 
@@ -323,18 +414,18 @@
      &to 2    &kp ESC         &none        &kp UP     &kp F11  &kp F12                                                                &kp C_PREV     &kp KP_N7     &kp KP_N8     &kp KP_N9     &kp KP_SLASH      &none
   &cap_tab      &none      &kp LEFT      &kp DOWN   &kp RIGHT    &to 4                                                                &kp C_NEXT     &kp KP_N4     &kp KP_N5     &kp KP_N6  &kp KP_MULTIPLY      &none
  &kp LSHFT      &none         &none         &none       &none    &none   &bksp_concatenate  &kp END  &kp PG_UP  &kp PG_UP    &none    &kp DEL    &kp C_PP     &kp KP_N1     &kp KP_N2     &kp KP_N3     &kp KP_MINUS  &kp RSHFT
- &kp LSHFT  &kp LCTRL      &kp LGUI      &kp LALT   &kp MINUS           &kp SPACE  &kp TAB  &kp PG_DN  &kp PG_DN  &kp RET  &kp SPACE                 &kp KP_N0    &kp KP_DOT  &kp KP_ENTER      &kp KP_PLUS  &kp RSHFT
+ &kp LSHFT  &kp LCTRL      &kp LGUI      &kp LALT   &kp MINUS           &kp SPACE  &kp TAB  &mt LSHFT PG_DN  &mt LSHFT PG_DN  &kp RET  &kp SPACE                 &kp KP_N0    &kp KP_DOT  &kp KP_ENTER      &kp KP_PLUS  &kp RSHFT
             >;
         };
 
         layer_gaming {
             bindings = <
- &mt F1 ESC     &kp F2    &kp F3    &kp F4  &magic 7 0                                                                                    &kp F8     &kp F9   &kp F10    &kp F11    &kp F12 
+ &mt ESC F1     &kp F2    &kp F3    &kp F4  &magic 7 0                                                                                    &kp F8     &kp F9   &kp F10    &kp F11    &kp F12 
      &kp N9     &kp N0    &kp N1    &kp N2      &kp N3  &kp N4                                                                 &kp N5     &kp N6     &kp N7    &kp N8   &kp LBKT   &kp RBKT
   &td_qgame    &kp TAB     &kp Q     &kp W       &kp E   &kp R                                                                  &kp Y      &kp U      &kp I     &kp O      &kp P   &kp BSLH
       &kp G   &kp CAPS     &kp A     &kp S       &kp D   &kp F                                                                  &kp H      &kp J      &kp K     &kp L   &kp SEMI    &kp SQT
-      &kp B  &kp LSHFT     &kp Z     &kp X       &kp C   &kp V   &kp BSPC  &kp HOME  &kp PG_UP    &kp UP  &kp LEFT  &kp RIGHT   &kp N      &kp M  &kp COMMA   &kp DOT   &kp FSLH  &kp RSHFT
-  &kp LSHFT  &kp LCTRL  &kp LGUI  &kp LALT   &kp MINUS          &kp SPACE   &kp END  &kp PG_DN  &kp DOWN   &kp RET  &kp SPACE          &kp EQUAL   &kp RALT  &kp RGUI  &kp RCTRL  &kp RSHFT
+      &kp B  &kp LSHFT     &kp Z     &kp X       &kp C   &kp V   &kp BSPC  &kp END  &kp PG_UP    &kp UP  &kp LEFT  &kp RIGHT   &kp N      &kp M  &kp COMMA   &kp DOT   &kp FSLH  &kp RSHFT
+  &kp LSHFT  &kp LALT  &kp LGUI  &kp MINUS   &kp LCTRL          &kp SPACE   &kp TAB  &mt LSHFT PG_DN  &kp DOWN   &kp RET  &kp SPACE          &kp RCTRL   &kp EQUAL  &kp RGUI  &kp RALT  &kp RSHFT
             >;
         };
         
@@ -344,19 +435,19 @@
       &kp N1     &kp N2    &kp N3    &kp N4      &kp N5  &kp N6                                                                &kp N7           &kp N8     &kp N9    &kp N0   &kp LBKT           &kp RBKT
  &td_layer_3      &win_quit     &kp W     &kp E       &kp R   &kp T                                                                 &kp Y            &kp U      &kp I     &kp O      &kp P  &mo_tap 6 BSLH
     &cap_tab_tri      &kp A     &kp S     &kp D       &kp F   &kp G                                                                 &kp H            &kp J      &kp K     &kp L   &kp SEMI            &kp SQT
-   &kp LSHFT      &kp Z     &kp X     &kp C       &kp V   &kp B   &bksp_concatenate  &mo_tap 6 END  &kp PG_UP    &kp UP  &kp LEFT  &kp RIGHT   &kp N            &kp M  &kp COMMA   &kp DOT   &kp FSLH          &kp RSHFT
-  &td_toggle_1  &kp LALT  &kp LGUI  &kp MINUS   &kp LCTRL          &kp SPACE  &kp TAB  &kp PG_DN  &kp DOWN   &kp RET  &kp SPACE                &kp RCTRL   &kp EQUAL  &kp RGUI  &kp RALT         &td_rshift
+   &kp LSHFT      &kp Z     &kp X     &kp C       &kp V   &kp B   &bksp_concatenate  &mo_tap 6 END  &kp PG_UP    &kp UP  &kp LEFT  &kp RIGHT   &kp N            &win_menu  &kp COMMA   &kp DOT   &kp FSLH          &kp RSHFT
+  &td_toggle_1  &kp LALT  &kp LGUI  &kp MINUS   &kp LCTRL          &kp SPACE  &kp TAB  &mt LSHFT PG_DN  &kp DOWN   &kp RET  &kp SPACE                &kp RCTRL   &kp EQUAL  &kp RGUI  &kp RALT         &td_rshift
             >;
         };
 
         layer_mo3 {
             bindings = <
- &kp C_BRI_DN     &kp C_BRI_UP  &mt RG(TAB) RG(PSCRN)  &kp RG(RS(S))    &kp F5                                                                      &kp F8          &none       &kp C_MUTE      &kp C_VOL_DN    &kp C_VOL_UP
+ &kp C_BRI_DN     &kp C_BRI_UP  &mt RG(TAB) RG(PSCRN)  &kp RG(RS(S))    &mt RG(RA(PSCRN)) F5                                                                      &kp F8          &none       &kp C_MUTE      &kp C_VOL_DN    &kp C_VOL_UP
  &kp GRAVE      &none         &to 0         &none  &magic 7 0   &kp F6                                                                    &mt F7 C_PREV    &kp KP_NUM      &kp SLCK       &kp INS        &kp PSCRN      &none
      &to 5    &kp ESC         &none        &kp UP     &kp F11  &kp F12                                                                &kp C_PREV     &kp KP_N7     &kp KP_N8     &kp KP_N9     &kp KP_SLASH      &none
   &cap_tab_tri      &none      &kp LEFT      &kp DOWN   &kp RIGHT    &to 4                                                                &kp C_NEXT     &kp KP_N4     &kp KP_N5     &kp KP_N6  &kp KP_MULTIPLY      &none
  &kp LSHFT      &none         &none         &none       &none    &none   &bksp_concatenate  &kp END  &kp PG_UP  &kp PG_UP    &none    &kp DEL    &kp C_PP     &kp KP_N1     &kp KP_N2     &kp KP_N3     &kp KP_MINUS  &kp RSHFT
- &td_toggle_1  &kp LALT     &kp LGUI     &kp MINUS      &kp LCTRL           &kp SPACE  &kp TAB  &kp PG_DN  &kp PG_DN  &kp RET  &kp SPACE                 &kp KP_N0    &kp KP_DOT  &kp KP_ENTER      &kp KP_PLUS  &kp RSHFT
+ &td_toggle_1  &kp LALT     &kp LGUI     &kp MINUS      &kp LCTRL           &kp SPACE  &kp TAB  &mt LSHFT PG_DN  &mt LSHFT PG_DN  &kp RET  &kp SPACE                 &kp KP_N0    &kp KP_DOT  &kp KP_ENTER      &kp KP_PLUS  &kp RSHFT
             >;
         };
 
