@@ -187,7 +187,7 @@
         combo_grave {
             timeout-ms = <15>;
             key-positions = <10 22>;
-            bindings = <&kp GRAVE>;
+            bindings = <&kp RET>;
         };
     };
     
@@ -197,21 +197,21 @@
         label = "TAP_DANCE_TO_1";
         #binding-cells = <0>;
         tapping-term-ms = <200>;
-        bindings = <&mo_tap 1 RET>, <&to 1>;
+        bindings = <&mo_tap 1 GRAVE>, <&to 1>;
     };
     td_layer_2: tap_dance_2 {
         compatible = "zmk,behavior-tap-dance";
         label = "TAP_DANCE_TO_3";
         #binding-cells = <0>;
         tapping-term-ms = <200>;
-        bindings = <&mo_tap 3 RET>, <&to 3>;
+        bindings = <&mo_tap 3 GRAVE>, <&to 3>;
     };
     td_layer_3: tap_dance_a {
         compatible = "zmk,behavior-tap-dance";
         label = "TAP_DANCE_TO_6";
         #binding-cells = <0>;
         tapping-term-ms = <200>;
-        bindings = <&mo_tap 6 RET>, <&to 6>;
+        bindings = <&mo_tap 6 GRAVE>, <&to 6>;
     };
     td_lshift: tap_dance_3 {
         compatible = "zmk,behavior-tap-dance";
